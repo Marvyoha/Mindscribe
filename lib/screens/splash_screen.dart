@@ -24,24 +24,25 @@ class SplashScreen extends ConsumerWidget {
           : const OnboardingScreen();
       // Use a post-frame callback to avoid navigating during build.
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (context.mounted) {
+        Future.delayed(const Duration(milliseconds: 800), () {
+          if (!context.mounted) return;
           Navigator.of(context).pushReplacement(
             PageRouteBuilder(
               pageBuilder: (_, _, _) => target,
               transitionsBuilder: (_, animation, _, child) =>
                   FadeTransition(opacity: animation, child: child),
-              transitionDuration: const Duration(milliseconds: 450),
+              transitionDuration: const Duration(milliseconds: 800),
             ),
           );
-        }
+        });
       });
     }
 
     final brightness = _resolveBrightness(context, themeMode);
     final isDark = brightness == Brightness.dark;
     final logo = isDark
-        ? 'assets/Logo_splashscreen_dark.jpg'
-        : 'assets/Logo_splashscreen_light.jpg';
+        ? 'assets/Logo_splashscreen_dark.png'
+        : 'assets/Logo_splashscreen_light.png';
 
     return Scaffold(
       body: Container(

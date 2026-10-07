@@ -75,17 +75,21 @@ class _NewEditEntryScreenState extends ConsumerState<NewEditEntryScreen> {
     final notifier = ref.read(journalProvider.notifier);
 
     try {
+      int? savedId;
       if (_isEditing) {
         await notifier.updateEntry(entryToSave, analyzeWithAi: analyzeWithAi);
       } else {
-        await notifier.saveEntry(entryToSave, analyzeWithAi: analyzeWithAi);
+        savedId = await notifier.saveEntry(entryToSave, analyzeWithAi: analyzeWithAi);
       }
       if (mounted) {
         setState(() => _isSaving = false);
         if (!_isEditing && analyzeWithAi == true) {
+          final savedEntry = savedId != null
+              ? ref.read(journalProvider).entries.firstWhere((e) => e.id == savedId, orElse: () => entryToSave)
+              : entryToSave;
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (_) => EntryDetailScreen(entry: entryToSave),
+              builder: (_) => EntryDetailScreen(entry: savedEntry),
             ),
           );
         } else {
@@ -110,7 +114,7 @@ class _NewEditEntryScreenState extends ConsumerState<NewEditEntryScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final accent = Theme.of(context).colorScheme.secondary;
     final bg = Theme.of(context).scaffoldBackgroundColor;
-    final surface = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final surface = Theme.of(context).colorScheme.surface;
     final textColor = isDark
         ? const Color(0xFFF8FAFC)
         : const Color(0xFF1E293B);

@@ -49,6 +49,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.4
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -56,6 +58,12 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/Logo_dark.png"
+  remove_alpha_ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -65,7 +73,7 @@ flutter:
   uses-material-design: true
   assets:
     - .env
-    - assets/Logo_splashscreen_light.jpg
-    - assets/Logo_splashscreen_dark.jpg
-    - assets/Logo_light.jpg
-    - assets/Logo_dark.jpg
+    - assets/Logo_splashscreen_light.png
+    - assets/Logo_splashscreen_dark.png
+    - assets/Logo_light.png
+    - assets/Logo_dark.png

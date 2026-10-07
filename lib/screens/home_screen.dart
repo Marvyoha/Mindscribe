@@ -187,7 +187,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           )
                         : null,
                     filled: true,
-                    fillColor: isDark ? const Color(0xFF1E293B) : Colors.white,
+                    fillColor: Theme.of(context).colorScheme.surface,
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 12,

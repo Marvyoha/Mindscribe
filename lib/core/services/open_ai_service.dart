@@ -28,9 +28,12 @@ class OpenAIService {
       );
     }
 
-    final baseUrl =
+    final rawUrl =
         await _storage.resolveApiUrl() ?? 'https://api.openai.com/v1';
-    final model = dotenv.env['OPENAI_MODEL']?.contains('auto') == true
+    final baseUrl = rawUrl
+        .replaceAll(RegExp(r'\s+'), '')
+        .replaceAll(RegExp(r'/+$'), '');
+    final model = dotenv.env['OPENAI_BASE_URL']?.contains('free') == true
         ? dotenv.env['OPENAI_MODEL']
         : _defaultModel;
 
@@ -46,11 +49,20 @@ class OpenAIService {
     };
 
     try {
-      final response = await _api.post(
-        endpoint: '$baseUrl/chat/completions',
-        body: body,
-        additionalHeaders: {'Authorization': 'Bearer $apiKey'},
-      );
+      final response = dotenv.env['OPENAI_BASE_URL']!.contains('free')
+          ? await _api.post(
+              endpoint: '$baseUrl/chat/completions',
+              body: body,
+              additionalHeaders: {
+                'Authorization': 'Bearer $apiKey',
+                'ngrok-skip-browser-warning': 'true',
+              },
+            )
+          : await _api.post(
+              endpoint: '$baseUrl/chat/completions',
+              body: body,
+              additionalHeaders: {'Authorization': 'Bearer $apiKey'},
+            );
 
       final content = _extractContent(response);
       if (content == null) return entry;

@@ -218,7 +218,7 @@ class _EmptyState extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF1E293B) : Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
@@ -240,7 +240,7 @@ class _EmptyState extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Tap "Analyze with AI & Save" to generate a summary, takeaways, and a reflection prompt.',
+            'Tap "Analyze with AI & Save" or the refresh button above to generate a summary, takeaways, and a reflection prompt.',
             style: GoogleFonts.spaceGrotesk(
               fontSize: 12.5,
               color: muted,

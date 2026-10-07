@@ -16,6 +16,7 @@ class StorageService {
   static const _keyApiKey = 'openai_api_key';
   static const _keyOnboarding = 'has_completed_onboarding';
   static const _keyApiUrl = 'openai_api_url';
+  static const _keyThemeMode = 'theme_mode';
 
   // --- API key -----------------------------------------------------------
 
@@ -70,6 +71,15 @@ class StorageService {
 
   Future<void> setCompletedOnboarding(bool value) =>
       _storage.write(key: _keyOnboarding, value: value.toString());
+
+  // --- Theme mode --------------------------------------------------------
+  Future<String?> getThemeMode() => _storage.read(key: _keyThemeMode);
+  Future<void> saveThemeMode(String? value) {
+    if (value == null || value.isEmpty) {
+      return _storage.delete(key: _keyThemeMode);
+    }
+    return _storage.write(key: _keyThemeMode, value: value);
+  }
 
   // --- Data reset --------------------------------------------------------
 

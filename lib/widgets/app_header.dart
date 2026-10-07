@@ -18,8 +18,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onSettings;
   final String? title;
 
-  static const _lightLogo = 'assets/Logo_light.jpg';
-  static const _darkLogo = 'assets/Logo_dark.jpg';
+  static const _lightLogo = 'assets/Logo_light.png';
+  static const _darkLogo = 'assets/Logo_dark.png';
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +49,14 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
       actions: [
-        IconButton(
-          onPressed: onThemeToggle,
-          icon: Icon(
-            isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
-            color: color,
-          ),
-          tooltip: isDark ? 'Switch to light mode' : 'Switch to dark mode',
-        ),
+        // IconButton(
+        //   onPressed: onThemeToggle,
+        //   icon: Icon(
+        //     isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+        //     color: color,
+        //   ),
+        //   tooltip: isDark ? 'Switch to light mode' : 'Switch to dark mode',
+        // ),
         IconButton(
           onPressed: onSettings,
           icon: Icon(Icons.settings_outlined, color: color),

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../services/database_service.dart';
 import '../services/storage_service.dart';
 
 class SettingsState {
@@ -72,6 +73,7 @@ class SettingsNotifier extends Notifier<SettingsState> {
 
   Future<void> clearAllData() async {
     await _storage.clearAllData();
+    await DatabaseService().clearAllEntries();
     state = const SettingsState();
   }
 }

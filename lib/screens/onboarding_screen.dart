@@ -72,7 +72,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final accent = Theme.of(context).colorScheme.secondary;
     final bg = Theme.of(context).scaffoldBackgroundColor;
-    final text = Theme.of(context).colorScheme.primary;
+    final text = Theme.of(context).colorScheme.secondary;
     final muted = isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B);
 
     return Scaffold(

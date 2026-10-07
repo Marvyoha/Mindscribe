@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../core/providers/journal_provider.dart';
 import '../core/providers/settings_provider.dart';
 import '../core/providers/theme_provider.dart';
+import 'home_screen.dart';
 
 /// Screen for editing API keys, switching themes, and viewing app info.
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -210,8 +212,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           TextButton(
             onPressed: () async {
               await ref.read(settingsProvider.notifier).clearAllData();
-              // In a real app, you might want to restart the app or force navigation to onboarding.
-              if (context.mounted) Navigator.pop(context);
+              await ref.read(journalProvider.notifier).loadEntries();
+              ref.read(themeProvider.notifier).setThemeMode(ThemeMode.system);
+              if (context.mounted) {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (_) => const HomeScreen()),
+                  (route) => false,
+                );
+              }
             },
             child: const Text('Wipe Data', style: TextStyle(color: Colors.red)),
           ),
