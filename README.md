@@ -89,6 +89,3 @@ MindScribe supports both standard cloud OpenAI APIs and **locally self-hosted Op
 - **Splash Screen**: Seamless native launch screens backed by `values-night` resources and `Logo_splashscreen_light.png` / `Logo_splashscreen_dark.png`.
 
 ---
-
-## License
-Licensed under the MIT License.
